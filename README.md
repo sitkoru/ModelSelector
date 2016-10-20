@@ -1,4 +1,4 @@
-[![NuGet](https://img.shields.io/nuget/v/Sitko.ModelSelector.svg?style=flat-square)](https://www.nuget.org/packages/Sitko.ModelSelector/)
+[![NuGet](https://img.shields.io/nuget/v/Sitko.ModelSelector.svg?style=flat-square)](https://www.nuget.org/packages/Sitko.ModelSelector/) [![Build status](https://ci.appveyor.com/api/projects/status/cu5qv5hgamas15gv/branch/master?svg=true)](https://ci.appveyor.com/project/Sitkoru/modelselector/branch/master)
 
 # ModelSelector
 
