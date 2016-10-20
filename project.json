@@ -1,5 +1,19 @@
 ﻿{
   "version": "1.0.1",
+  "title": "Sitkoru.ModelSelector",
+  "authors": ["George Drak"],
+  "description": "Serialaizable selectors for build dynamic linq queries to data collections",
+
+
+  "packOptions": {
+    "summary": "Serialaizable selectors for build dynamic linq queries to data collections",
+    "projectUrl": "https://github.com/sitkoru/ModelSelector",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/sitkoru/ModelSelector"
+    },
+    "tags": ["linq", "serializable"]
+  },
 
   "dependencies": {
     "System.Linq.Dynamic.Core": "1.0.6.5",
