@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
-using JetBrains.Annotations;
 using Newtonsoft.Json;
+using Sitko.ModelSelector.Json;
 using Sitko.ModelSelector.Predicates;
 
-namespace Sitko.ModelSelector
+namespace Sitko.ModelSelector.Base
 {
     public class ModelSelector
     {
-        [JsonProperty] protected readonly List<Predicate> Predicates = new List<Predicate>();
+        [JsonProperty("predicates")] protected readonly List<Predicate> Predicates = new List<Predicate>();
 
         protected virtual void AddPredicate(Predicate predicate)
         {
@@ -28,7 +28,7 @@ namespace Sitko.ModelSelector
             return JsonConvert.SerializeObject(this, GetJsonSettings());
         }
 
-        public static ModelSelector FromJson<T>(string json)
+        public static ModelSelector<T> FromJson<T>(string json)
         {
             return JsonConvert.DeserializeObject<ModelSelector<T>>(json, GetJsonSettings());
         }
@@ -37,8 +37,7 @@ namespace Sitko.ModelSelector
         private static JsonSerializerSettings GetJsonSettings()
         {
             var settings = new JsonSerializerSettings();
-            settings.Converters.Add(new SelectorDeserializer());
-            settings.Converters.Add(new PredicateDeserializer());
+            settings.Converters.Add(new SelectorJsonConverter());
             return settings;
         }
     }
@@ -47,29 +46,13 @@ namespace Sitko.ModelSelector
     {
         private Expression<Func<T, bool>> _compiledExpression;
 
-        [JsonProperty("ModelType")]
-        [UsedImplicitly]
-        private Type _modelType;
-
-        public ModelSelector()
-        {
-            _modelType = typeof(T);
-        }
-
-        /*private string _linqExpression = null;
-        private object[] _linqArguments;*/
-
         public IQueryable<T> ApplyPredicates(IQueryable<T> model)
         {
             var builded = true;
             if (_compiledExpression == null)
-            {
                 builded = BuildLinqExpression();
-            }
             if (builded)
-            {
                 model = model.Where(_compiledExpression);
-            }
             return model;
         }
 
@@ -87,9 +70,7 @@ namespace Sitko.ModelSelector
                     where[index] = selectorPredicate.ToDynamicLinqString(index);
                     var attribute = selectorPredicate.GetAttribute();
                     if (attribute != null)
-                    {
                         attributes.Add(selectorPredicate.GetAttribute());
-                    }
                     index++;
                 }
 
@@ -110,9 +91,7 @@ namespace Sitko.ModelSelector
         {
             Predicates.Add(predicate);
             if (_compiledExpression != null)
-            {
                 BuildLinqExpression();
-            }
         }
 
 

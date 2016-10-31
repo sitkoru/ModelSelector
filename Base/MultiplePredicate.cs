@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Newtonsoft.Json;
 
-namespace Sitko.ModelSelector
+namespace Sitko.ModelSelector.Base
 {
     public abstract class MultiplePredicate<TModel, TProperty> : Predicate<TModel, TProperty>
     {
@@ -13,17 +13,14 @@ namespace Sitko.ModelSelector
             : base(property)
         {
             _values = values;
-            PropertyType = typeof(TProperty);
-            ValueType = typeof(IEnumerable<TProperty>);
-
         }
 
         protected MultiplePredicate(string propertyName, IEnumerable<TProperty> values) : base(propertyName)
         {
             _values = values;
-            PropertyType = typeof(TProperty);
-            ValueType = typeof(IEnumerable<TProperty>);
         }
+
+        public override bool IsMultiple { get; } = true;
 
         public override object GetAttribute()
         {

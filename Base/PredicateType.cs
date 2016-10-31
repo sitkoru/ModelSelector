@@ -1,4 +1,4 @@
-﻿namespace Sitko.ModelSelector
+﻿namespace Sitko.ModelSelector.Base
 {
     public enum PredicateType
     {

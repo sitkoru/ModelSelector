@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using Newtonsoft.Json;
 
-namespace Sitko.ModelSelector
+namespace Sitko.ModelSelector.Base
 {
     public abstract class SinglePredicate<TModel, TProperty> : Predicate<TModel, TProperty>
     {
@@ -17,6 +17,8 @@ namespace Sitko.ModelSelector
         {
             _value = value;
         }
+
+        public override bool IsMultiple { get; } = false;
 
         public override object GetAttribute()
         {
