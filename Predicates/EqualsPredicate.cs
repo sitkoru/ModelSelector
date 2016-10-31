@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using JetBrains.Annotations;
+using Sitko.ModelSelector.Base;
 
 namespace Sitko.ModelSelector.Predicates
 {

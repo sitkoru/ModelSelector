@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using JetBrains.Annotations;
+using Sitko.ModelSelector.Base;
 
 namespace Sitko.ModelSelector.Predicates
 {
@@ -14,6 +15,8 @@ namespace Sitko.ModelSelector.Predicates
         public IsNullPredicate(string propertyName, TProperty value) : base(propertyName)
         {
         }
+
+        public override bool IsMultiple { get; } = true;
 
         public override PredicateType Type { get; } = PredicateType.IsNull;
 
